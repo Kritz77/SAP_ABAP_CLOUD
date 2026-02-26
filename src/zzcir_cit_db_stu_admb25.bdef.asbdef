@@ -1,0 +1,49 @@
+managed implementation in class ZZCIBP_R_CIT_DB_STU_ADMB25 unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZZCIR_CIT_DB_STU_ADMB25 alias ZzcirCitDbStuAdmb25
+persistent table ZCIT_DB_STU_ADM
+extensible
+draft table ZZCICT_DB_S_DB25
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( mandatory : create )
+   StudentID;
+
+  field ( readonly )
+   CreatedBy,
+   CreatedAt,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   StudentID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZCIT_DB_STU_ADM corresponding extensible
+  {
+    StudentID = STUDENT_ID;
+    StudentName = STUDENT_NAME;
+    Department = DEPARTMENT;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+}
